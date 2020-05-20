@@ -35,11 +35,12 @@ class LinkedList
     return nil if index > @size - 1 || index < 0
 
     node = @head
-    (0...index).each { |tmp| node = node.next_node }
+    (0...index).each { |tmp| node = node.next_node } # TODO: refactor
 
     node
   end
 
+  # TODO: refactor
   def pop
     return nil if @size == 0
 
