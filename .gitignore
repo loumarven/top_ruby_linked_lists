@@ -1,5 +1,8 @@
 # Ignore bundler config
 .bundle/
 
+# Ignore program's bin/
+bin/
+
 # Ignore rspec test results
 spec/examples.txt
