@@ -66,4 +66,58 @@ class LinkedList
 
     old_last
   end
+
+  def contains?(value)
+    return false if @size == 0
+
+    node = @head
+    loop do
+      break if node.nil?
+
+      if node.value == value
+        return true
+      else
+        node = node.next_node
+      end
+    end
+
+    false
+  end
+
+  def find(value)
+    return nil if @size == 0
+
+    node = @head
+    index = 0
+
+    loop do
+      break if node.nil?
+
+      if node.value == value
+        return index
+      else
+        node = node.next_node
+        index += 1
+      end
+    end
+
+    nil
+  end
+
+  def to_s
+    return nil if @size == 0
+
+    node =  @head
+    ret = ""
+    loop do
+      break if node.nil?
+
+      ret += "( #{node.value} )"
+      ret += " -> "
+
+      node = node.next_node
+    end
+
+    ret += "nil"
+  end
 end

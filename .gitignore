@@ -2,7 +2,7 @@
 .bundle/
 
 # Ignore program's bin/
-bin/
+bin
 
 # Ignore rspec test results
 spec/examples.txt
