@@ -1,3 +1,5 @@
+require 'node'
+
 class LinkedList
   attr_reader :head, :tail, :size
 
@@ -119,5 +121,33 @@ class LinkedList
     end
 
     ret += "nil"
+  end
+
+  def insert_at(value, index)
+    return nil if index > @size
+
+    node_before_index = @head
+    node_at_index = nil
+    new_node = Node.new(value)
+    iterator = 0
+
+    until iterator == index do
+      node_before_index = node_before_index.next_node if iterator > 0
+      iterator += 1
+    end
+
+    if index == 0
+      node_at_index = @head
+      @head = new_node
+    else
+      node_at_index = node_before_index.next_node
+      node_before_index.next_node = new_node
+    end
+
+    new_node.next_node = node_at_index
+    @tail = new_node if new_node.next_node.nil?
+    @size += 1
+
+    new_node
   end
 end

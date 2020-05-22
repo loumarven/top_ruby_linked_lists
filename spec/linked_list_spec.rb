@@ -263,3 +263,106 @@ RSpec.describe LinkedList, "#to_s" do
     end
   end
 end
+
+RSpec.describe LinkedList, "#insert_at" do
+  context "when inserting the node somewhere in the middle" do
+    it "inserts the node at the given index" do
+      linked_list = LinkedList.new
+      node = Node.new(50)
+      node2 = Node.new(60)
+      node3 = Node.new(70)
+      node4 = Node.new(80)
+
+      linked_list.append(node)
+      linked_list.append(node2)
+      linked_list.append(node3)
+      linked_list.append(node4)
+
+      inserted = linked_list.insert_at(90, 2)
+
+      expect(inserted).to be_truthy
+      expect(linked_list.size).to eq 5
+      expect(linked_list.at(2).value).to eq 90
+      expect(linked_list.at(3)).to eq node3
+    end
+  end
+
+  context "when inserting at index 0" do
+    it "inserts the node at index 0" do
+      linked_list = LinkedList.new
+      node = Node.new(50)
+      node2 = Node.new(60)
+      node3 = Node.new(70)
+      node4 = Node.new(80)
+
+      linked_list.append(node)
+      linked_list.append(node2)
+      linked_list.append(node3)
+      linked_list.append(node4)
+
+      inserted = linked_list.insert_at(40, 0)
+
+      expect(inserted).to be_truthy
+      expect(linked_list.size).to eq 5
+      expect(linked_list.at(0).value).to eq 40
+      expect(linked_list.at(1)).to eq node
+      expect(linked_list.head).to eq inserted
+    end
+  end
+
+  context "when inserting right after the last index" do
+    it "appends the node to the list" do
+      linked_list = LinkedList.new
+      node = Node.new(50)
+      node2 = Node.new(60)
+      node3 = Node.new(70)
+      node4 = Node.new(80)
+
+      linked_list.append(node)
+      linked_list.append(node2)
+      linked_list.append(node3)
+      linked_list.append(node4)
+      
+      inserted = linked_list.insert_at(90, 4)
+
+      expect(inserted).to be_truthy
+      expect(linked_list.size).to eq 5
+      expect(linked_list.at(4)).to eq inserted
+      expect(linked_list.tail).to eq inserted
+    end
+  end
+
+  context "when inserting beyond the size" do
+    it "returns nil" do
+      linked_list = LinkedList.new
+      node = Node.new(50)
+      node2 = Node.new(60)
+      node3 = Node.new(70)
+      node4 = Node.new(80)
+
+      linked_list.append(node)
+      linked_list.append(node2)
+      linked_list.append(node3)
+      linked_list.append(node4)
+      
+      inserted = linked_list.insert_at(90, 7)
+
+      expect(inserted).to be_nil
+      expect(linked_list.size).to eq 4
+    end
+  end
+
+  context "when inserting to an empty list" do
+    it "inserts the new node" do
+      linked_list = LinkedList.new
+
+      inserted = linked_list.insert_at(90, 0)
+
+      expect(inserted).to be_truthy
+      expect(linked_list.size).to eq 1
+      expect(linked_list.at(0)).to eq inserted
+      expect(linked_list.head).to eq inserted
+      expect(linked_list.tail).to eq inserted
+    end
+  end
+end
