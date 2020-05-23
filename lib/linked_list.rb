@@ -128,12 +128,12 @@ class LinkedList
 
     node_at_index = nil
     new_node = Node.new(value)
-    node_before_index = before(index)
 
     if index == 0
       node_at_index = @head
       @head = new_node
     else
+      node_before_index = before(index)
       node_at_index = node_before_index.next_node
       node_before_index.next_node = new_node
     end
