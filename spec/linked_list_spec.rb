@@ -366,3 +366,101 @@ RSpec.describe LinkedList, "#insert_at" do
     end
   end
 end
+
+RSpec.describe LinkedList, "#remove_at" do
+  context "when removing a node somewhere in the middle" do
+    it "removes the node successfully" do
+      linked_list = LinkedList.new
+      node = Node.new(50)
+      node2 = Node.new(60)
+      node3 = Node.new(70)
+      node4 = Node.new(80)
+
+      linked_list.append(node)
+      linked_list.append(node2)
+      linked_list.append(node3)
+      linked_list.append(node4)
+
+      removed = linked_list.remove_at(2)
+
+      expect(removed).to be_truthy
+      expect(linked_list.size).to eq 3
+      expect(linked_list.at(2)).to eq node4
+    end
+  end
+
+  context "when removing at index 0" do
+    it "removes the node at index 0" do
+      linked_list = LinkedList.new
+      node = Node.new(50)
+      node2 = Node.new(60)
+      node3 = Node.new(70)
+      node4 = Node.new(80)
+
+      linked_list.append(node)
+      linked_list.append(node2)
+      linked_list.append(node3)
+      linked_list.append(node4)
+
+      removed = linked_list.remove_at(0)
+
+      expect(removed).to be_truthy
+      expect(linked_list.size).to eq 3
+      expect(linked_list.head).to eq node2
+    end
+  end
+
+  context "when removing the last node" do
+    it "removes the last node" do
+      linked_list = LinkedList.new
+      node = Node.new(50)
+      node2 = Node.new(60)
+      node3 = Node.new(70)
+      node4 = Node.new(80)
+
+      linked_list.append(node)
+      linked_list.append(node2)
+      linked_list.append(node3)
+      linked_list.append(node4)
+      
+      removed = linked_list.remove_at(3)
+
+      expect(removed).to be_truthy
+      expect(linked_list.size).to eq 3
+      expect(linked_list.tail).to eq node3
+    end
+  end
+
+  context "when removing beyond the size" do
+    it "returns nil" do
+      linked_list = LinkedList.new
+      node = Node.new(50)
+      node2 = Node.new(60)
+      node3 = Node.new(70)
+      node4 = Node.new(80)
+
+      linked_list.append(node)
+      linked_list.append(node2)
+      linked_list.append(node3)
+      linked_list.append(node4)
+      
+      removed = linked_list.remove_at(4)
+
+      expect(removed).to be_nil
+      expect(linked_list.size).to eq 4
+    end
+  end
+
+  context "when removing from an empty list" do
+    it "does nothing" do
+      linked_list = LinkedList.new
+
+      removed = linked_list.remove_at(0)
+
+      expect(removed).to be_nil
+      expect(linked_list.size).to eq 0
+      expect(linked_list.head).to be_nil
+      expect(linked_list.tail).to be_nil
+    end
+  end
+end
