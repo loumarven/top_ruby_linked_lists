@@ -149,18 +149,18 @@ class LinkedList
     return nil if @size == 0 || index > @size - 1
 
     node_at_index = nil
-    node_before_index = before(index)
 
     if index == 0
       node_at_index = @head
       @head = @head.next_node
-    elsif index == @size - 1
-      node_at_index = node_before_index.next_node
-      node_before_index.next_node = nil
-      @tail = node_before_index
     else
+      node_before_index = before(index)
       node_at_index = node_before_index.next_node
       node_before_index.next_node = node_at_index.next_node
+
+      if node_before_index.next_node.nil?
+        @tail = node_before_index
+      end
     end
 
     @size -= 1
@@ -169,7 +169,9 @@ class LinkedList
 
   private
   def before(index)
-    return nil if index <= 0 || index > @size
+    return nil if @size == 0
+    return nil if index <= 0
+    return nil if index > @size
 
     before = @head
     (1...index).each { |tmp| before = before.next_node }
